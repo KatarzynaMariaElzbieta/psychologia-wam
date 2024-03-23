@@ -6,6 +6,9 @@ from django.db import models
 class Tags(models.Model):
     name = models.CharField(verbose_name='tag', max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Article(models.Model):
     create_date = models.DateTimeField(verbose_name="Data_utworzenia", auto_now_add=True)

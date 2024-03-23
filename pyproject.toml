@@ -12,6 +12,7 @@ isort = "^5.13.2"
 psycopg2-binary = "^2.9.9"
 django-bootstrap-form = "^3.4"
 django-crispy-forms = "^2.1"
+django-summernote = "^0.8.20"
 
 [tool.poetry.dev-dependencies]
 
