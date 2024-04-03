@@ -1,4 +1,6 @@
-import xml
+import datetime
+
+from dateutil.relativedelta import relativedelta
 
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -13,12 +15,15 @@ from articles.forms import ArticleForm
 
 from articles.models import Article
 
-from src.helper_function.text_cleaners import cleanhtml
+from src.helper_function.prepare_artickle_preview import article_preview
 
 
 def index(request):
     """Main view generating"""
-    return render(request, "base.html")
+    articles = Article.objects.filter(create_date__gte=datetime.date.today() - relativedelta(months=3)).all().order_by('create_date').values()
+    for i in articles:
+        article_preview(i)
+    return render(request, "main_page.html", {"articles": articles})
 
 
 def view_article(request, id):
@@ -31,15 +36,8 @@ def article_list(request, page=None):
     """Main view generating"""
     article_list = Article.objects.all().order_by('create_date').values()
     for i in article_list:
-        i["img"] = i["body"][i["body"].find("<img src=")+10:i["body"].find("\" ", i["body"].find("<img src="))]
-        i["desc"] = cleanhtml(i["body"])
-        i["desc"] = i["desc"][:i["desc"].find(".", 150, 300)]
-        print(i["user_author_id"])
-        user = User.objects.get(id=i["user_author_id"])
-        print(user)
-        i["author"] = user
-        # print(i.keys())
-    paginator = Paginator(article_list, 10)
+        article_preview(i)
+    paginator = Paginator(article_list, 2)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     return render(request, "articles_list.html", {"articles": page_obj})

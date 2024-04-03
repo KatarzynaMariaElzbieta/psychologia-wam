@@ -1,0 +1,11 @@
+.footer-primary {
+    background-color: #1F2E4F;
+    height: var(--nav-height);
+}
+
+.footer-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

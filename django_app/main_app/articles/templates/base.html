@@ -11,66 +11,26 @@
     <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"-->
     <!--          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <style>
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-    </style>
-
-
 </head>
 <body class="home">
-
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01" data-bs-theme="dark">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Strona główna</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/articles/0">Artykuły</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Słowniczek</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Kalendarium</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Wyloguj</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'signin' %}">Logowanie</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="d-flex">
-<div>
-{% if user.is_authenticated %}
-{% include "menu.html" %}
-{% endif %}
-</div>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <hr class="mt-0 mb-4">
-            {% block content %}
-            {% endblock %}
+{% include "navigation.html" %}
+<div class="d-flex mb-5">
+    <!--<div>-->
+    <!--{% if user.is_authenticated %}-->
+    <!--{% include "menu.html" %}-->
+    <!--{% endif %}-->
+    <!--</div>-->
+    <div class="container content-main">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <hr class="mt-0 mb-4">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 </div>
-</div>
+<footer>{% include "footpage.html" %}</footer>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
