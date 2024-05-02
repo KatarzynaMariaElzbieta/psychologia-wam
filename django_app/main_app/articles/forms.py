@@ -2,6 +2,10 @@ from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django_summernote.fields import SummernoteTextField
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
+from articles.models import Article, Tags
 
 
 class SignUpForm(forms.Form):
@@ -31,3 +35,15 @@ class SignUpForm(forms.Form):
 class LoginForm(forms.Form):
     login = forms.CharField(label="Login", max_length=50)
     password = forms.CharField(label="Hasło", widget=forms.PasswordInput)
+
+
+class ArticleForm(forms.ModelForm):
+    tags = forms.ModelMultipleChoiceField(queryset=Tags.objects.all(),
+                                          widget=forms.SelectMultiple(attrs={'class': 'name'}))
+
+    class Meta:
+        model = Article
+        exclude = ['create_date', 'update_date', 'user_author', 'tags_article']
+        widgets = {
+            'body': SummernoteWidget(),
+        }

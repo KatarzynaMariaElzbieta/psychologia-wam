@@ -1,15 +1,52 @@
+import datetime
+
+from dateutil.relativedelta import relativedelta
+
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
 from articles.forms import SignUpForm, LoginForm
 
+from articles.forms import ArticleForm
+
+from articles.models import Article
+
+from src.helper_function.prepare_artickle_preview import article_preview
+
 
 def index(request):
     """Main view generating"""
-    return render(request, "base.html")
+    articles = Article.objects.filter(create_date__gte=datetime.date.today() - relativedelta(months=3)).all().order_by('create_date').values()
+    for i in articles:
+        article_preview(i)
+    return render(request, "main_page.html", {"articles": articles})
+
+
+def view_article(request, id):
+    """Main view generating"""
+    article = Article.objects.get(id=id)
+    return render(request, "article_base.html", {"article": vars(article)})
+
+
+def article_list(request, page=None):
+    """Main view generating"""
+    article_list = Article.objects.all().order_by('create_date').values()
+    for i in article_list:
+        article_preview(i)
+    paginator = Paginator(article_list, 2)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "articles_list.html", {"articles": page_obj})
+
+
+def add_article(request):
+    """Main view generating"""
+    form = ArticleForm()
+    return render(request, "new_article.html", {"form": form})
 
 
 class SignUp(View):

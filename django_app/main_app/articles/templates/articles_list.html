@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<p>{{ mess }}</p>
+<div>
+    <h1 class="rounded bg-warning-subtle bg-gradient .fs-2 text text-center text-color-"
+        style="max-width: 750px;">Artykuły</h1>
+    {% for i in articles %}
+    <div class="card mb-3" style="max-width: 750px;">
+        <div class="row g-0">
+            <div class="col-md-5">
+                      <img src="{{ i.img|safe }}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.title }}</h5>
+                        <p class="card-text"><small class="text-body-secondary">{{ i.author }}</small></p>
+                    <p class="card-text">{{ i.desc }}</p>
+                    <a href="{% url 'article' id=i.id %}">Czytaj dalej</a>
+                    <p class="card-text"><small class="text-body-secondary">{{ i.update_date }}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
