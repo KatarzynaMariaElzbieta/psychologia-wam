@@ -1,5 +1,5 @@
 .nav-primary {
-    background-color: #1F2E4F;
+    background-color: var(--color-primary);
     height: var(--nav-height);
 }
 
@@ -20,7 +20,7 @@
         position: absolute;
         top: var(--nav-height);
         left: 0;
-        background-color: #1F2E4F;
+        background-color: var(--color-primary);
         padding: 0 2rem;
         z-index: 1031;
     }
@@ -29,4 +29,10 @@
 .dropdown-menu {
     background-color: #142639;
     border: none;
+
+    @media (min-width: 992px) {
+        margin-top: 0 !important;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 }

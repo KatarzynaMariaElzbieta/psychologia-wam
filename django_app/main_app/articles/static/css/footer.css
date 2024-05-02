@@ -1,5 +1,5 @@
 .footer-primary {
-    background-color: #1F2E4F;
+    background-color: var(--color-primary);
     height: var(--nav-height);
 }
 

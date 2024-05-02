@@ -1,34 +1,89 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<h1 class="rounded bg-warning-subtle bg-gradient .fs-2 text text-center text-color-
-" style="max-width: 750px;">Aktualności</h1>
-<div id="carouselExampleAutoplaying" class="carousel" data-bs-ride="carousel" style="max-width: 750px;">
-    <div class="carousel-inner">
-        {% for i in articles %}
-        <div class="carousel-item active">
-            <img src="{{ i.img|safe }}" class="d-md-block w-100" alt="{{ i.title }}">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>{{i.title}}</h5>
-                <p>{{i.desc}}</p>
-            </div>
-            <img src="{{ i.img|safe }}" class="d-md-block w-100" alt="{{ i.title }}">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>{{i.title}}</h5>
-                <p>{{i.desc}}</p>
+<div class="d-flex flex-column justify-content-center min-height">
+    <h1 class="mb-3">Aktualności</h1>
+
+    <div class="carousel-wrapper hide-on-mobile">
+        <div id="carouselDesktop" class="carousel slide">
+            <div class="carousel-inner">
+                {% for article in articles %}
+                {% if forloop.counter0|divisibleby:"3" or forloop.first %}
+                <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                    {% endif %}
+                    <div class="card carousel-card" style="width: 33%;">
+                        <img src="{{ article.img|safe }}" class="card-img-top" alt="{{ article.title }}" height="50%">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text text-ellipsis">Some quick example text to build on the card title and
+                                make up the bulk
+                                of
+                                the
+                                card's content Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's content Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="btn btn-primary px-5">Więcej</a>
+                        </div>
+                    </div>
+                    {% if forloop.counter0|add:"1"|divisibleby:"3" or forloop.last %}
+                </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
-
-        {% endfor %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDesktop" data-bs-slide="prev">
+            <span class="visually-hidden">Previous</span>
+            <img src="{% static 'images/circle-arrow-left-solid.svg' %}" alt="logo-wam" height="50px">
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselDesktop" data-bs-slide="next">
+            <span class="visually-hidden">Next</span>
+            <img src="{% static 'images/circle-arrow-right-solid.svg' %}" alt="logo-wam" height="50px">
+        </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+
+    <div class="carousel-wrapper hide-on-desktop">
+        <div id="carouselMobile" class="carousel slide">
+            <div class="carousel-inner">
+                {% for article in articles %}
+                {% if forloop.counter or forloop.first %}
+                <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                    {% endif %}
+                    <div class="card carousel-card">
+                        <img src="{{ article.img|safe }}" class="card-img-top" alt="{{ article.title }}" height="50%">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text text-ellipsis">Some quick example text to build on the card title and
+                                make up the bulk
+                                of
+                                the
+                                card's content Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's content Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="btn btn-primary px-5">Więcej</a>
+                        </div>
+                    </div>
+                    {% if forloop.counter or forloop.last %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselMobile" data-bs-slide="prev">
+            <span class="visually-hidden">Previous</span>
+            <img src="{% static 'images/circle-arrow-left-solid.svg' %}" alt="logo-wam" height="30px">
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselMobile" data-bs-slide="next">
+            <span class="visually-hidden">Next</span>
+            <img src="{% static 'images/circle-arrow-right-solid.svg' %}" alt="logo-wam" height="30px">
+        </button>
+    </div>
 </div>
 {% endblock %}

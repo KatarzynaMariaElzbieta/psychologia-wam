@@ -14,24 +14,14 @@
 </head>
 <body class="home">
 {% include "navigation.html" %}
-<div class="d-flex mb-5">
-    <!--<div>-->
-    <!--{% if user.is_authenticated %}-->
-    <!--{% include "menu.html" %}-->
-    <!--{% endif %}-->
-    <!--</div>-->
-    <div class="container content-main">
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <hr class="mt-0 mb-4">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </div>
+<div class="content-main">
+    <div class="container min-height">
+        {% block content %}
+        {% endblock %}
     </div>
 </div>
 <footer>{% include "footpage.html" %}</footer>
-</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
