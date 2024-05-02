@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "articles"
+    "articles",
+    "bootstrapform",
+    "crispy_forms"
 ]
 
 MIDDLEWARE = [
@@ -78,7 +80,7 @@ WSGI_APPLICATION = "main_app.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": "localhost",
+        "HOST": os.environ.get("wam_db_host"),
         "NAME": os.environ.get("wam_db"),
         "USER": os.environ.get("wam_db_user"),
         "PASSWORD": os.environ.get("wam_db_password"),
