@@ -15,12 +15,15 @@
 <body class="home">
 {% include "navigation.html" %}
 <div class="content-main">
-    <div class="container min-height">
+    {% load static %}
+    <img class="corner-logo-main" src="{% static 'images/logo-wam.png' %}"  alt="logo-wam">
+
+    <div class="container min-height offset-top">
         {% block content %}
         {% endblock %}
     </div>
 </div>
-<footer>{% include "footpage.html" %}</footer>
+<footer>{% include "footer.html" %}</footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

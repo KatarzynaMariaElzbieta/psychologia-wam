@@ -5,20 +5,20 @@
 <!--{% load crispy_forms_tags %}-->
 <!--{{ notlog }}-->
 
-<form method="post">
+<form class="margin-top-big" method="post">
     {% csrf_token %}
     <div class="card">
         <div class="card-header middle"><b>Logowanie</b></div>
         <div class="card-body">
             {{ form|bootstrap }}
-            <div class="middle">
-                <input type="submit" value="Zaloguj" , class="btn btn-secondary">
+            <div class="middle mt-2">
+                <input type="submit" value="Zaloguj" class="btn btn-primary">
             </div>
         </div>
     </div>
-    <nav class="nav nav-pills nav-fill">
-    <a class="nav-item nav-link" href="{% url 'signup' %}">Rejestracja</a>
-    <a class="nav-item nav-link active" href="{% url 'signin' %}">Logowanie</a>
-</nav>
+    <nav class="nav nav-pills nav-fill mt-4">
+        <a class="button-secondary w-50" href="{% url 'signup' %}">Rejestracja</a>
+        <a class="button-primary w-50" href="{% url 'signin' %}">Logowanie</a>
+    </nav>
 </form>
 {% endblock %}

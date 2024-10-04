@@ -2,31 +2,24 @@
 {% load static %}
 {% block content %}
 <div class="d-flex flex-column justify-content-center min-height">
-    <h1 class="mb-3">Aktualności</h1>
+    <h1 class="mb-3 main_header">Aktualności</h1>
 
     <div class="carousel-wrapper hide-on-mobile">
         <div id="carouselDesktop" class="carousel slide">
-            <div class="carousel-inner">
+            <div class="carousel-inner" >
                 {% for article in articles %}
                 {% if forloop.counter0|divisibleby:"3" or forloop.first %}
-                <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                <div class="carousel-item {% if forloop.first %} active {% endif %}" style="gap: 35px">
                     {% endif %}
                     <div class="card carousel-card" style="width: 33%;">
-                        <img src="{{ article.img|safe }}" class="card-img-top" alt="{{ article.title }}" height="50%">
+                        <div class="counter">{{ forloop.counter|stringformat:"02d" }}</div>
+                        <img src="{{ article.img|safe }}" class="card-img-top fill-img h-50 img-border" alt="{{ article.title }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ article.title }}</h5>
-                            <p class="card-text text-ellipsis">Some quick example text to build on the card title and
-                                make up the bulk
-                                of
-                                the
-                                card's content Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
-                            <a href="#" class="btn btn-primary px-5">Więcej</a>
+                            <div class="card-article">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text text-ellipsis">{{ article.desc }}</p>
+                                <a href="{% url 'article' id=article.id %}" class="btn px-5">Czytaj więcej >></a>
+                            </div>
                         </div>
                     </div>
                     {% if forloop.counter0|add:"1"|divisibleby:"3" or forloop.last %}
@@ -37,11 +30,11 @@
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselDesktop" data-bs-slide="prev">
             <span class="visually-hidden">Previous</span>
-            <img src="{% static 'images/circle-arrow-left-solid.svg' %}" alt="logo-wam" height="50px">
+            <img src="{% static 'images/strzalka.svg' %}" alt="wstecz" height="50px">
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselDesktop" data-bs-slide="next">
             <span class="visually-hidden">Next</span>
-            <img src="{% static 'images/circle-arrow-right-solid.svg' %}" alt="logo-wam" height="50px">
+            <img src="{% static 'images/strzalka.svg' %}" alt="dalej" height="50px">
         </button>
     </div>
 
@@ -53,21 +46,13 @@
                 <div class="carousel-item {% if forloop.first %} active {% endif %}">
                     {% endif %}
                     <div class="card carousel-card">
-                        <img src="{{ article.img|safe }}" class="card-img-top" alt="{{ article.title }}" height="50%">
+                        <img src="{{ article.img|safe }}" class="card-img-top contain-img" alt="{{ article.title }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ article.title }}</h5>
-                            <p class="card-text text-ellipsis">Some quick example text to build on the card title and
-                                make up the bulk
-                                of
-                                the
-                                card's content Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
-                            <a href="#" class="btn btn-primary px-5">Więcej</a>
+                            <div class="card-article">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text text-ellipsis">{{ article.desc }}</p>
+                            </div>
+                            <a href="{% url 'article' id=article.id %}" class="btn px-5">Czytaj więcej</a>
                         </div>
                     </div>
                     {% if forloop.counter or forloop.last %}
@@ -78,11 +63,11 @@
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselMobile" data-bs-slide="prev">
             <span class="visually-hidden">Previous</span>
-            <img src="{% static 'images/circle-arrow-left-solid.svg' %}" alt="logo-wam" height="30px">
+            <img src="{% static 'images/strzalka.svg' %}" alt="wstecz" height="30px">
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselMobile" data-bs-slide="next">
             <span class="visually-hidden">Next</span>
-            <img src="{% static 'images/circle-arrow-right-solid.svg' %}" alt="logo-wam" height="30px">
+            <img src="{% static 'images/strzalka.svg' %}" alt="dalej" height="30px">
         </button>
     </div>
 </div>

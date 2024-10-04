@@ -10,7 +10,7 @@ urlpatterns = [
     path("logout/", logoutView, name="logout"),
     path("add_article/", views.add_article, name="new_article"),
     path("article/<int:id>", views.view_article, name="article"),
-    path("articles/", views.article_list, name="articles_list"),
-    path("articles/<int:page>/", views.article_list, name="articles_list"),
+    path("articles/", views.article_list_view, name="articles_list"),
+    path("articles/<int:page>/", views.article_list_view, name="articles_list"),
 
 ]

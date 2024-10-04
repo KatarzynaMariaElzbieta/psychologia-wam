@@ -22,8 +22,9 @@ from django.urls import path, include
 from articles.views import SignUp, Login
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("", include("articles.urls")),
+    path("events/", include("events_calendar.urls")),
+    path("admin/", admin.site.urls),
     path("signup/", SignUp.as_view(), name="signup"),
     path("signin/", Login.as_view(), name="signin"),
     path("summernote/", include('django_summernote.urls')),

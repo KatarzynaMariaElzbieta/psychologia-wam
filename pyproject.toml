@@ -14,6 +14,9 @@ django-bootstrap-form = "^3.4"
 django-crispy-forms = "^2.1"
 django-summernote = "^0.8.20"
 python-dateutil = "^2.9.0"
+wagtail-modeladmin = "^2.0.0"
+django-scheduler = "^0.10.1"
+django-bower = "^5.2.0"
 
 [tool.poetry.dev-dependencies]
 

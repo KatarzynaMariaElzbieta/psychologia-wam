@@ -1,4 +1,5 @@
 import datetime
+from os import PRIO_PGRP
 
 from dateutil.relativedelta import relativedelta
 
@@ -20,7 +21,13 @@ from src.helper_function.prepare_artickle_preview import article_preview
 
 def index(request):
     """Main view generating"""
-    articles = Article.objects.filter(create_date__gte=datetime.date.today() - relativedelta(months=3)).all().order_by('create_date').values()
+    # TODO: odwrócić kolejność
+    articles = (
+        Article.objects.filter(create_date__gte=datetime.date.today() - relativedelta(months=12))
+        .all()
+        .order_by("create_date")
+        .values()[:9]
+    )
     for i in articles:
         article_preview(i)
     return render(request, "main_page.html", {"articles": articles})
@@ -32,15 +39,23 @@ def view_article(request, id):
     return render(request, "article_base.html", {"article": vars(article)})
 
 
-def article_list(request, page=None):
+def article_list_view(request, page=None):
     """Main view generating"""
-    article_list = Article.objects.all().order_by('create_date').values()
+    article_list = Article.objects.all().order_by("create_date").values()
     for i in article_list:
         article_preview(i)
-    paginator = Paginator(article_list, 2)
+    paginator = Paginator(article_list, 4)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "articles_list.html", {"articles": page_obj})
+
+    page_range = [i for i in range(max(1, page_obj.number -1), min(page_obj.number + 1, paginator.num_pages) + 1)]
+    if len(page_range) < 3:
+        page_range = page_range + [3] if page_obj.number == 1 else [page_range[-1] -2] + page_range
+    return render(request, "articles_list.html", {"articles": page_obj,
+                                              "page_range": page_range,
+                                              "first_page": 1,
+                                              "last_page": paginator.num_pages,
+                                                  })
 
 
 def add_article(request):
@@ -64,14 +79,12 @@ class SignUp(View):
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
             password = form.cleaned_data["password"]
-            user = User.objects.create_user(
-                user_name, password=password, first_name=first_name, last_name=last_name
-            )
+            user = User.objects.create_user(user_name, password=password, first_name=first_name, last_name=last_name)
             if user is not None:
                 if user.is_authenticated:
                     login(self.request, user)
             return render(request, "my-data.html", {"user": user})
-        return render(request, 'sign-up.html', {'form': form})
+        return render(request, "sign-up.html", {"form": form})
 
 
 class Login(View):
@@ -108,6 +121,6 @@ class Login(View):
 
 
 def logoutView(request):
-    """ Logging out of the application. After logging out, it takes you to a page with a from form to log in."""
+    """Logging out of the application. After logging out, it takes you to a page with a from form to log in."""
     logout(request)
     return redirect(reverse("signin"))
