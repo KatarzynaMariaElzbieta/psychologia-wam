@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "articles",
     "schedule",
-    "events_calendar",
+    # "events_calendar",
     "bootstrapform",
     "crispy_forms",
     "django_summernote",
