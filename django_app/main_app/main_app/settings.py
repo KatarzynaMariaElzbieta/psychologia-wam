@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import environ
+import logging
 import os
 from pathlib import Path
 from django.urls import reverse_lazy
@@ -25,7 +27,7 @@ SECRET_KEY = "django-insecure-jj$b991d6n5=7&a_h9$k^px*e*me0leo&p46)f49*1ti#hzp*u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 # Application definition
 
@@ -78,17 +80,24 @@ WSGI_APPLICATION = "main_app.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+logging.info(os.environ.get("WAM_DB_NAME"))
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("wam_db_host"),
-        "NAME": os.environ.get("wam_db"),
-        "USER": os.environ.get("wam_db_user"),
-        "PASSWORD": os.environ.get("wam_db_password"),
+        # "HOST": "localhost",
+        "HOST": "postgres",
+        "NAME": env("WAM_DB_NAME"),
+        "USER": env("WAM_DB_USER"),
+        "PASSWORD": env("WAM_DB_PASSWORD"),
         "PORT": 5432
     }
 }
 
+SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -128,6 +137,7 @@ STATIC_ROOT = os.path.join("/static/")
 
 STATICFILES_DIRS = [
     "articles/",
+    "media/django-summernote"
 ]
 
 LOGIN_URL = reverse_lazy("signin")

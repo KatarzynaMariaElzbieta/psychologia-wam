@@ -171,6 +171,19 @@ python-versions = ">=3.8"
 django = ">=4.2"
 
 [[package]]
+name = "django-environ"
+version = "0.11.2"
+description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
+category = "main"
+optional = false
+python-versions = ">=3.6,<4"
+
+[package.extras]
+develop = ["coverage[toml] (>=5.0a4)", "pytest (>=4.6.11)", "furo (>=2021.8.17b43,<2021.9.0)", "sphinx (>=3.5.0)", "sphinx-notfound-page"]
+docs = ["furo (>=2021.8.17b43,<2021.9.0)", "sphinx (>=3.5.0)", "sphinx-notfound-page"]
+testing = ["coverage[toml] (>=5.0a4)", "pytest (>=4.6.11)"]
+
+[[package]]
 name = "django-filter"
 version = "24.2"
 description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
@@ -644,7 +657,7 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "7eee6cab782f9ba8f909fbe4f112762648e67b02c835830e01fd94ce761c71b9"
+content-hash = "54ebf3a9b4da2ad9ca9296a820a24883e0c30d9cef8ca61f3088c42b65e0c1ca"
 
 [metadata.files]
 anyascii = []
@@ -661,6 +674,7 @@ django = []
 django-bootstrap-form = []
 django-bower = []
 django-crispy-forms = []
+django-environ = []
 django-filter = []
 django-modelcluster = []
 django-permissionedforms = []
