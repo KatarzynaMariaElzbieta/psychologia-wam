@@ -11,9 +11,11 @@ services:
     networks:
       - mynetwork
     volumes:
-      - /var/lib/psychologia_wam/media:/app/media/django-summernote
+      - ~/stats_files/psychologia_wam/media:/app/media/django-summernote
     command: >
-      sh -c "poetry run python manage.py runserver 0.0.0.0:8000"
+      sh -c "poetry run python manage.py makemigrations; 
+             poetry run python manage.py migrate;
+             poetry run python manage.py runserver 0.0.0.0:8000"
 
   postgres:
     image: postgres:13
@@ -26,7 +28,7 @@ services:
     ports:
       - "5436:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ~/postgres_data:/var/lib/postgresql/data
     networks:
       - mynetwork
 
