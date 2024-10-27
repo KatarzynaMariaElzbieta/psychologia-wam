@@ -1,0 +1,12 @@
+.corner-logo-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 98px
+}
+
+@media (max-width: 1024px) {
+    .corner-logo-main {
+        height: 64px
+    }
+}

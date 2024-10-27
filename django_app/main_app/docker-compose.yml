@@ -1,0 +1,39 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+    volumes:
+      - /var/lib/psychologia_wam/media:/app/media/django-summernote
+    command: >
+      sh -c "poetry run python manage.py runserver 0.0.0.0:8000"
+
+  postgres:
+    image: postgres:13
+    environment:
+      DB_HOST: postgres
+      POSTGRES_DB: ${WAM_DB_NAME}
+      POSTGRES_USER: ${WAM_DB_USER}
+      WAM_DB_PASSWORD: ${WAM_DB_PASSWORD}
+      POSTGRES_PASSWORD: ${WAM_DB_PASSWORD}
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  summernote_files:

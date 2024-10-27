@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<p>{{ mess }}</p>
+<h2>Moje dane</h2>
+<div>
+    <p>Nazwa użytkownika: {{user.username}}</p>
+    <p>Imię: {{user.first_name}}</p>
+    <p>Nazwisko: {{user.last_name}}</p>
+</div>
+{% endblock %}

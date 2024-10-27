@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.4.1.js" xmlns="http://www.w3.org/1999/html"
+        xmlns="http://www.w3.org/1999/html"></script>
+{% load bootstrap %}
+
+<form class="margin-top-big" method="post">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-header middle"><b>Rejestracja</b></div>
+        <div class="card-body">
+            {{ form|bootstrap }}
+            <div class="middle mt-3">
+                <input class="btn btn-primary" type="submit" id='reset_button' value="Zarejestruj">
+            </div>
+        </div>
+    </div>
+</form>
+<nav class="nav nav-pills nav-fill mt-5">
+    <a class="button-primary w-50" href="{% url 'signup' %}">Rejestracja</a>
+    <a class="button-secondary w-50" href="{% url 'signin' %}">Logowanie</a>
+</nav>
+<script src="/static/javascript/menu.js"></script>
+
+{% endblock %}

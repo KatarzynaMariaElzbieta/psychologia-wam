@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="375" height="375" viewBox="0 0 375 375">
+<defs>
+<clipPath id="clip_0">
+<path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H1562.5V1562.5H0Z" fill-rule="evenodd"/>
+</clipPath>
+<clipPath id="clip_1">
+<path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H1562.5V1562.5H0Z" fill-rule="evenodd"/>
+</clipPath>
+<clipPath id="clip_2">
+<path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H1562.5V1562.5H0Z" fill-rule="evenodd"/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip_0)">
+<path transform="matrix(.75,0,0,.75,0,0)" d="M0 0H500V500H0Z" fill="#ffffff"/>
+</g>
+<g clip-path="url(#clip_1)">
+<path transform="matrix(.75,0,0,.75,0,0)" d="M0 0H500V500H0Z" fill="#ffffff"/>
+</g>
+<g clip-path="url(#clip_2)">
+<path transform="matrix(3.1249998,0,0,3.1249998,-12.499999,-12.499999)" d="M64 4C30.916 4 4 30.916 4 64 4 97.084 30.916 124 64 124 97.084 124 124 97.084 124 64 124 30.916 97.084 4 64 4ZM64 116C35.327 116 12 92.673007 12 64 12 35.326997 35.327 12 64 12 92.673007 12 116 35.327 116 64 116 92.673007 92.673 116 64 116Z" fill="#1f2e4f"/>
+<path transform="matrix(3.1249998,0,0,3.1249998,-12.499999,-12.499999)" d="M57.822 37.307C56.26 35.746 53.727998 35.746 52.164999 37.307 50.602998 38.869 50.602998 41.402 52.164999 42.964L73.201 64 52.165 85.037C50.603 86.599 50.603 89.132 52.165 90.693 52.946 91.474 53.97 91.865 54.994 91.865 56.017999 91.865 57.041 91.474 57.822999 90.693L81.687 66.828C83.24899 65.26601 83.24899 62.734 81.687 61.171L57.822 37.307Z" fill="#1f2e4f"/>
+</g>
+</svg>
