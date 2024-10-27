@@ -1,5 +1,5 @@
 import datetime
-from os import PRIO_PGRP
+import logging
 
 from dateutil.relativedelta import relativedelta
 
@@ -49,7 +49,11 @@ def article_list_view(request, page=None):
     page_obj = paginator.get_page(page_number)
 
     page_range = [i for i in range(max(1, page_obj.number -1), min(page_obj.number + 1, paginator.num_pages) + 1)]
-    if len(page_range) < 3:
+    if paginator.num_pages == 1:
+        page_range = None
+    elif paginator.num_pages == 2:
+        page_range = range(1, 3)
+    elif len(page_range) < 3:
         page_range = page_range + [3] if page_obj.number == 1 else [page_range[-1] -2] + page_range
     return render(request, "articles_list.html", {"articles": page_obj,
                                               "page_range": page_range,
