@@ -1,9 +1,7 @@
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
-from django_summernote.fields import SummernoteTextField
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.widgets import SummernoteWidget
 
 from articles.models import Article, Tags
 
