@@ -1,5 +1,4 @@
 import datetime
-import logging
 
 from dateutil.relativedelta import relativedelta
 
@@ -14,9 +13,11 @@ from articles.forms import SignUpForm, LoginForm
 
 from articles.forms import ArticleForm
 
-from articles.models import Article
+from articles.models import Article, DictionaryEntry
 
 from src.helper_function.prepare_artickle_preview import article_preview
+from src.helper_function.pagination import prepare_pagination
+from static.views import article_list
 
 
 def index(request):
@@ -48,17 +49,30 @@ def article_list_view(request, page=None):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    page_range = [i for i in range(max(1, page_obj.number -1), min(page_obj.number + 1, paginator.num_pages) + 1)]
+    page_range = [i for i in range(max(1, page_obj.number - 1), min(page_obj.number + 1, paginator.num_pages) + 1)]
     if paginator.num_pages == 1:
         page_range = None
     elif paginator.num_pages == 2:
         page_range = range(1, 3)
     elif len(page_range) < 3:
-        page_range = page_range + [3] if page_obj.number == 1 else [page_range[-1] -2] + page_range
+        page_range = page_range + [3] if page_obj.number == 1 else [page_range[-1] - 2] + page_range
     return render(request, "articles_list.html", {"articles": page_obj,
-                                              "page_range": page_range,
-                                              "first_page": 1,
-                                              "last_page": paginator.num_pages,
+                                                  "page_range": page_range,
+                                                  "first_page": 1,
+                                                  "last_page": paginator.num_pages,
+                                                  })
+
+
+def dictionaries_list_view(request, page=None):
+    """Dictionary view generating"""
+    dictionary_entry_list = DictionaryEntry.objects.all().order_by("name").values()
+    # for i in dictionary_entry_list:
+    #     article_preview(i)
+    page_range, page_obj, num_pages = prepare_pagination(dictionary_entry_list, 6, request)
+    return render(request, "dictionary_view.html", {"articles": page_obj,
+                                                  "page_range": page_range,
+                                                  "first_page": 1,
+                                                  "last_page": num_pages,
                                                   })
 
 

@@ -12,5 +12,6 @@ urlpatterns = [
     path("article/<int:id>", views.view_article, name="article"),
     path("articles/", views.article_list_view, name="articles_list"),
     path("articles/<int:page>/", views.article_list_view, name="articles_list"),
-
+    path("dictionary/", views.dictionaries_list_view, name="dictionaries_list"),
+    path("dictionary/<int:page>/", views.dictionaries_list_view, name="dictionaries_list"),
 ]
